@@ -20,52 +20,65 @@ Output a single integer, indicating the minimum number letters
 you need to erase in order to give the string a simplicity of
 1 or 2.
 """
-s = input()
-letter = [0]*26
-letters = {
-    'a': 0,
-    'b': 1,
-    'c': 2,
-    'd': 3,
-    'e': 4,
-    'f': 5,
-    'g': 6,
-    'h': 7,
-    'i': 8,
-    'j': 9,
-    'k': 10,
-    'l': 11,
-    'm': 12,
-    'n': 13,
-    'o': 14,
-    'p': 15,
-    'q': 16,
-    'r': 17,
-    's': 18,
-    't': 19,
-    'u': 20,
-    'v': 21,
-    'w': 22,
-    'x': 23,
-    'y': 24,
-    'z': 25
-}
-for i in s:
-    letter[letters[i]] += 1
-simplicity = 0
-for i in letter:
-    if i != 0:
-        simplicity += 1
-removals = 0
-if simplicity <= 2:
-    print(0)
-else:
+import sys
+for line in sys.stdin:
+    s = line[:len(line)-1]
+    if s == '' or s == '\n':
+        break
+    letter = [0]*26
+    letters = {
+        'a': 0,
+        'b': 1,
+        'c': 2,
+        'd': 3,
+        'e': 4,
+        'f': 5,
+        'g': 6,
+        'h': 7,
+        'i': 8,
+        'j': 9,
+        'k': 10,
+        'l': 11,
+        'm': 12,
+        'n': 13,
+        'o': 14,
+        'p': 15,
+        'q': 16,
+        'r': 17,
+        's': 18,
+        't': 19,
+        'u': 20,
+        'v': 21,
+        'w': 22,
+        'x': 23,
+        'y': 24,
+        'z': 25
+    }
+    for i in s:
+        letter[letters[i]] += 1
+    simplicity = 0
     for i in letter:
-        if i == 1 and simplicity > 2:
-            removals += i
-            simplicity -= 1
-            if simplicity <= 2:
-                break
-        elif i > 1:
-            removals += i-1
-    print(removals)
+        if i != 0:
+            simplicity += 1
+    removals = 0
+    if simplicity <= 2:
+        print(0)
+    else:
+        letter2 = sorted(letter)
+        letter.clear()
+        for i in letter2:
+            if i != 0:
+                letter.append(i)
+        for i in letter:
+            if i == 1 and simplicity > 2:
+                removals += 1
+                simplicity -= 1
+                if simplicity <= 2:
+                    break
+        for i in letter:
+            if i > 1 and simplicity > 2:
+                removals += i
+                simplicity -=1
+                if simplicity <= 2:
+                    break
+        print(removals)

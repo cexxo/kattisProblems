@@ -1,11 +1,14 @@
 "https://open.kattis.com/problems/zebrasocelots"
 n = int(input())
 animals = {}
-for i in range(n):
-    animals[i] = input()
-counter = 0
 found = False
-index = -1
+for i in range(n):
+    k = input()
+    if k == 'O':
+        found = True
+    if found:
+        animals[i] = k
+counter = 0
 while True:
     indeces = [k for k,v in animals.items() if v=='O']
     if len(indeces)==0:

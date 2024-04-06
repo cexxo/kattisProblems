@@ -1,4 +1,4 @@
-"https://open.kattis.com/problems/listgame"
+//"https://open.kattis.com/problems/listgame"
 #include<iostream>
 #include<cmath>
 int main() {
